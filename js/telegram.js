@@ -5,7 +5,9 @@ const Telegram = {
 
     initData() {
         this.chatId = 'undefined';
-        const initData = this.getQueryParam('initData');
+        //const initData = this.getQueryParam('initData');
+        const initData = Telegram.WebApp.initData;
+
         console.log('initData:', initData); // Debug log
         if (initData) {
             this.chatId = initData;
