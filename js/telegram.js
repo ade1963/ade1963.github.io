@@ -4,7 +4,7 @@ const Telegram = {
     username: null,
 
     initData() {
-        const initData = this.getQueryParam('initData');
+        const initData = this.getQueryParam('initDataUnsafe');
         if (initData) {
             this.initData = JSON.parse(decodeURIComponent(initData));
             this.chatId = this.initData.user?.id;

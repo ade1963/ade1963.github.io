@@ -4,12 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const calculatorDiv = document.getElementById('calculator');
     const scannerDiv = document.getElementById('scanner');
 
-    // Initialize Telegram data
-    Telegram.initData();
 
-    // Display user info
-    document.getElementById('chat-id').textContent = Telegram.chatId;
-    document.getElementById('username').textContent = Telegram.username;
+    // Initialize Telegram data
+    Telegram.initData().then(() => {
+        // Display user info
+        document.getElementById('chat-id').textContent = Telegram.chatId || 'N/A';
+        document.getElementById('username').textContent = Telegram.username || 'N/A';
+    });
 
     // Toolbox navigation
     calculatorIcon.addEventListener('click', () => {
