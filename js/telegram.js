@@ -8,11 +8,11 @@ const TelegramApp = {
         //const initData = this.getQueryParam('initData');
         Telegram.WebApp.ready()
         try {
-            const initData = Telegram.WebApp.initData;
+            const initData = Telegram.WebApp.initDataUnsafe;
     
             console.log('initData:', initData); // Debug log
             if (initData) {
-                this.chatId = initData;
+                this.chatId = JSON.stringify(initData);
                 try {
                     this.initData = JSON.parse(decodeURIComponent(initData));
                     console.log('Parsed initData:', this.initData); // Debug log
