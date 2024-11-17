@@ -1,4 +1,4 @@
-const Telegram = {
+const TelegramApp = {
     initData: null,
     chatId: 'undef',
     username: null,

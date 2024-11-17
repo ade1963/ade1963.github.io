@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     //    document.getElementById('chat-id').textContent = Telegram.chatId || 'N/A';
     //    document.getElementById('username').textContent = Telegram.username || 'N/A';
     //});
-    Telegram.initData();
+    TelegramApp.initData();
     // Display user info
-    document.getElementById('chat-id').textContent = Telegram.chatId;
-    document.getElementById('username').textContent = Telegram.username;
+    document.getElementById('chat-id').textContent = TelegramApp.chatId;
+    document.getElementById('username').textContent = TelegramApp.username;
 
 
     // Toolbox navigation
