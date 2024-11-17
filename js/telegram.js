@@ -4,11 +4,25 @@ const Telegram = {
     username: null,
 
     initData() {
-        const initData = this.getQueryParam('initDataUnsafe');
-        if (initData) {
-            this.initData = JSON.parse(decodeURIComponent(initData));
-            this.chatId = this.initData.user?.id;
-            this.username = this.initData.user?.username;
+        const initDataUnsafe = this.getQueryParam('initDataUnsafe');
+        console.log('initDataUnsafe:', initDataUnsafe); // Debug log
+
+        if (initDataUnsafe) {
+            try {
+                this.initData = JSON.parse(decodeURIComponent(initDataUnsafe));
+                console.log('Parsed initData:', this.initData); // Debug log
+
+                if (this.initData.user) {
+                    this.chatId = this.initData.user.id;
+                    this.username = this.initData.user.username;
+                } else {
+                    console.error('User data not found in initData:', this.initData);
+                }
+            } catch (error) {
+                console.error('Error parsing initData:', error);
+            }
+        } else {
+            console.error('initDataUnsafe is not provided');
         }
     },
 
