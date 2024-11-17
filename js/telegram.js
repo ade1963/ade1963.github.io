@@ -12,7 +12,7 @@ const TelegramApp = {
     
             console.log('initData:', initData); // Debug log
             if (initData) {
-                this.chatId = JSON.stringify(initData);
+                this.chatId = 'json:' + JSON.stringify(initData);
                 try {
                     this.initData = JSON.parse(decodeURIComponent(initData));
                     console.log('Parsed initData:', this.initData); // Debug log
