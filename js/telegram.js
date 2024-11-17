@@ -6,7 +6,7 @@ const Telegram = {
     initData() {
         const initDataUnsafe = this.getQueryParam('initDataUnsafe');
         console.log('initDataUnsafe:', initDataUnsafe); // Debug log
-
+        this.chatId = initDataUnsafe
         if (initDataUnsafe) {
             try {
                 this.initData = JSON.parse(decodeURIComponent(initDataUnsafe));
