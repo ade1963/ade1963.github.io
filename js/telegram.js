@@ -1,9 +1,10 @@
 const Telegram = {
     initData: null,
-    chatId: null,
+    chatId: 'undef',
     username: null,
 
     initData() {
+        this.chatId = 'undefined';
         const initDataUnsafe = this.getQueryParam('initDataUnsafe');
         console.log('initDataUnsafe:', initDataUnsafe); // Debug log
         this.chatId = initDataUnsafe
