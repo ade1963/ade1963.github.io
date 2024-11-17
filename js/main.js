@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Initialize Telegram data
-    //Telegram.initData().then(() => {
-    //    document.getElementById('chat-id').textContent = Telegram.chatId || 'N/A';
-    //    document.getElementById('username').textContent = Telegram.username || 'N/A';
-    //});
-    Telegram.initData();
+    Telegram.initData().then(() => {
+        document.getElementById('chat-id').textContent = Telegram.chatId || 'N/A';
+        document.getElementById('username').textContent = Telegram.username || 'N/A';
+    });
+    //Telegram.initData();
     // Display user info
-    document.getElementById('chat-id').textContent = Telegram.chatId;
-    document.getElementById('username').textContent = Telegram.username;
+    //document.getElementById('chat-id').textContent = Telegram.chatId;
+    //document.getElementById('username').textContent = Telegram.username;
 
 
     // Toolbox navigation
