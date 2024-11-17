@@ -5,11 +5,12 @@ const Telegram = {
 
     initData() {
         this.chatId = 'undefined';
-        const initDataUnsafe = this.getQueryParam('initDataUnsafe');
-        console.log('initDataUnsafe:', initDataUnsafe); // Debug log
-        if (initDataUnsafe) {
+        const initData = this.getQueryParam('initData');
+        console.log('initData:', initData); // Debug log
+        if (initData) {
+            this.chatId = initData;
             try {
-                this.initData = JSON.parse(decodeURIComponent(initDataUnsafe));
+                this.initData = JSON.parse(decodeURIComponent(initData));
                 console.log('Parsed initData:', this.initData); // Debug log
 
                 if (this.initData.user) {
@@ -22,8 +23,8 @@ const Telegram = {
                 console.error('Error parsing initData:', error);
             }
         } else {
-            console.error('initDataUnsafe is not provided');
-            this.chatId = 'initDataUnsafe is not provided';
+            console.error('initData is not provided');
+            this.chatId = 'initData is not provided';
         }
     },
 
