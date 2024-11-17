@@ -14,12 +14,11 @@ const TelegramApp = {
             if (initData) {
                 this.chatId = 'json:' + JSON.stringify(initData);
                 try {
-                    this.initData = JSON.parse(decodeURIComponent(initData));
-                    console.log('Parsed initData:', this.initData); // Debug log
+                    this.initData = initData;
     
                     if (this.initData.user) {
                         this.chatId = this.initData.user.id;
-                        this.username = this.initData.user.username;
+                        this.username = this.initData.user.last_name;
                     } else {
                         console.error('User data not found in initData:', this.initData);
                     }
