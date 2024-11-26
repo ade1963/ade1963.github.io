@@ -1,20 +1,30 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const calculatorIcon = document.getElementById('calculator-icon');
     const scannerIcon = document.getElementById('scanner-icon');
     const calculatorDiv = document.getElementById('calculator');
     const scannerDiv = document.getElementById('scanner');
 
-
-    // Initialize Telegram data
-    //Telegram.initData().then(() => {
-    //    document.getElementById('chat-id').textContent = Telegram.chatId || 'N/A';
-    //    document.getElementById('username').textContent = Telegram.username || 'N/A';
-    //});
-    TelegramApp.initData();
+    await TelegramApp.initData();
+    await UserData.getTools();
     // Display user info
     document.getElementById('chat-id').textContent = TelegramApp.chatId;
     document.getElementById('username').textContent = TelegramApp.username;
 
+    // Create an element to display the tools
+    const toolsList = document.createElement('ul');
+    toolsList.id = 'tools-list';
+
+    // Append each tool to the list
+    UserData.toolsData.forEach(tool => {
+        const toolItem = document.createElement('li');
+        toolItem.textContent = `${tool.name} - ${tool.tool_id}`;
+        toolsList.appendChild(toolItem);
+    });
+
+    // Append the tools list to the username span's parent element
+    document.querySelector('#username').parentElement.appendChild(toolsList);
+
+    await UserData.getFavorities(TelegramApp.chatId);
 
     // Toolbox navigation
     calculatorIcon.addEventListener('click', () => {

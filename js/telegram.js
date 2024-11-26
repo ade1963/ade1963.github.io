@@ -1,18 +1,21 @@
 const TelegramApp = {
     initData: null,
-    chatId: 'undef',
+    chatId: null,
     username: null,
 
-    initData() {
-        this.chatId = 'undefined';
+    async initData() {
+        //this.chatId = 'undefined';
         //const initData = this.getQueryParam('initData');
+        const DEFAULT_USER = 12345;
         Telegram.WebApp.ready()
         try {
+            //default user
+            this.chatId = DEFAULT_USER;
             const initData = Telegram.WebApp.initDataUnsafe;
     
             console.log('initData:', initData); // Debug log
             if (initData) {
-                this.chatId = 'json:' + JSON.stringify(initData);
+                //this.chatId = 'json:' + JSON.stringify(initData);
                 try {
                     this.initData = initData;
     
@@ -27,10 +30,10 @@ const TelegramApp = {
                 }
             } else {
                 console.error('initData is not provided');
-                this.chatId = 'initData is not provided';
+                //this.chatId = 'initData is not provided';
             }
         } catch (error) {
-            this.chatId = 'initData is not READY';
+            //this.chatId = 'initData is not READY';
         }
     },
 
