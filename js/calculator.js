@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         totalPriceSpan.textContent = totalPrice.toFixed(2);
     
         // Save the tax rate
-        const chatId = TelegramApp.chatId; // Assuming Telegram WebApp is used
-        const toolId = 1; // Replace with the actual tool_id for the calculator
-        await UserData.saveToolSettings(chatId, toolId, { taxRate: taxRate });
+        await UserData.saveToolSettings(TelegramApp.chatId, UserData.currentToolId, { taxRate: taxRate });
     });
 });

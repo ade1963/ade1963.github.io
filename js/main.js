@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('chat-id').textContent = TelegramApp.chatId;
     document.getElementById('username').textContent = TelegramApp.username;
 
-    const toolSettings = await UserData.fetchToolSettings(TelegramApp.chatId, 1); //TelegramApp.chatId, 1);
-
+    const toolSettings = await UserData.fetchToolSettings(TelegramApp.chatId, UserData.currentToolId);
     if (toolSettings != null)
         document.getElementById('tax-rate').value = toolSettings.taxRate;
 
@@ -38,6 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         scannerDiv.style.display = 'none';
         calculatorIcon.classList.add('active');
         scannerIcon.classList.remove('active');
+        UserData.currentToolId = 1;
     });
 
     scannerIcon.addEventListener('click', () => {
@@ -45,5 +45,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         scannerDiv.style.display = 'block';
         calculatorIcon.classList.remove('active');
         scannerIcon.classList.add('active');
+        UserData.currentToolId = 2;
     });
 });

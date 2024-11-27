@@ -1,11 +1,13 @@
 const UserData = {
     toolsData: [],
     toolsVaforities: [],
+    currentToolId: null,
     API_BASE_URL: null,
 
     Init() {
         //this.API_BASE_URL =`http://127.0.0.1:8000`;
         this.API_BASE_URL =`https://tools-api-ade1963.amvera.io`;
+        this.currentToolId = 1;
     },
 
     async getTools() {
