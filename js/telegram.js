@@ -7,10 +7,10 @@ const TelegramApp = {
         //this.chatId = 'undefined';
         //const initData = this.getQueryParam('initData');
         const DEFAULT_USER = 12345;
+        this.chatId = DEFAULT_USER;
         Telegram.WebApp.ready()
         try {
             //default user
-            this.chatId = DEFAULT_USER;
             const initData = Telegram.WebApp.initDataUnsafe;
     
             console.log('initData:', initData); // Debug log
@@ -30,7 +30,6 @@ const TelegramApp = {
                 }
             } else {
                 console.error('initData is not provided');
-                //this.chatId = 'initData is not provided';
             }
         } catch (error) {
             //this.chatId = 'initData is not READY';

@@ -1,9 +1,15 @@
 const UserData = {
     toolsData: [],
     toolsVaforities: [],
+    API_BASE_URL: null,
+
+    Init() {
+        //this.API_BASE_URL =`http://127.0.0.1:8000`;
+        this.API_BASE_URL =`https://tools-api-ade1963.amvera.io`;
+    },
 
     async getTools() {
-        const apiToolsUrl = 'https://tools-api-ade1963.amvera.io/api/tools/';
+        const apiToolsUrl = `${this.API_BASE_URL}/api/tools/`;
     
         try {
             // Fetch data from the API
@@ -44,7 +50,7 @@ const UserData = {
         if (typeof (userId) != 'number') {
             return;
         }
-        const apiVaforitiesUrl = 'https://tools-api-ade1963.amvera.io/api/user/favorites/';
+        const apiVaforitiesUrl = `${this.API_BASE_URL}/api/user/favorites/`;
         const params = new URLSearchParams({ user_id: userId });
         const url = `${apiVaforitiesUrl}?${params}`;
     
@@ -72,11 +78,71 @@ const UserData = {
                 console.log('---');
             });
 
-
         } catch (error) {
             console.error('Error fetching tools:', error);
         }
+    },
+
+async fetchToolSettings(chatId, toolId) {
+    const apiUrl = `${this.API_BASE_URL}/api/user/favorites/?user_id=${chatId}`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch tax rate. Status Code: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Find the favorite for the given tool_id
+        const favorite = data.find(fav => fav.tool_id === toolId);
+
+        if (favorite && favorite.settings && favorite.settings.taxRate) {
+            console.log('Tax rate restored:', favorite.settings.taxRate);
+            return favorite.settings;
+        } else {
+            console.log('No tax rate found for the specified tool.');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching tax rate:', error);
+        return null;
     }
+},
+
+async saveToolSettings(chatId, toolId, settings) {
+    const apiUrl = `${this.API_BASE_URL}/api/user/favorites/${toolId}?user_id=${chatId}`;
+    const payload = {
+        position: 1, // You can set it to any value
+        settings: settings // Store the tax rate in the settings object
+    };
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to save tax rate. Status Code: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Tax rate saved successfully:', data);
+    } catch (error) {
+        console.error('Error saving tax rate:', error);
+    }
+}
 
 
 };

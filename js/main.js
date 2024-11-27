@@ -4,11 +4,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     const calculatorDiv = document.getElementById('calculator');
     const scannerDiv = document.getElementById('scanner');
 
+    UserData.Init();
     await TelegramApp.initData();
     await UserData.getTools();
     // Display user info
     document.getElementById('chat-id').textContent = TelegramApp.chatId;
     document.getElementById('username').textContent = TelegramApp.username;
+
+    const toolSettings = await UserData.fetchToolSettings(TelegramApp.chatId, 1); //TelegramApp.chatId, 1);
+
+    if (toolSettings != null)
+        document.getElementById('tax-rate').value = toolSettings.taxRate;
 
     // Create an element to display the tools
     const toolsList = document.createElement('ul');
