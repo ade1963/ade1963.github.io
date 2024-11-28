@@ -39,6 +39,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Note: You need to include the jsQR library for QR code decoding.
-// Add this script tag to your index.html before scanner.js:
-// <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>

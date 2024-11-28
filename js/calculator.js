@@ -1,5 +1,4 @@
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const priceInput = document.getElementById('price');
     const taxRateInput = document.getElementById('tax-rate');
