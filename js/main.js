@@ -13,12 +13,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     await UserData.getTools();
     // Display user info
     document.getElementById('chat-id').textContent = TelegramApp.chatId;
-    document.getElementById('username').textContent = TelegramApp.username;
+    //document.getElementById('username').textContent = TelegramApp.username;
 
     const toolSettings = await UserData.fetchToolSettings(TelegramApp.chatId, UserData.currentToolId);
     if (toolSettings != null)
         document.getElementById('tax-rate').value = toolSettings.taxRate;
 
+    /*
     // Create an element to display the tools
     const toolsList = document.createElement('ul');
     toolsList.id = 'tools-list';
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Append the tools list to the username span's parent element
     document.querySelector('#username').parentElement.appendChild(toolsList);
+    */
 
     await UserData.getFavorities(TelegramApp.chatId);
 
