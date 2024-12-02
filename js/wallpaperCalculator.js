@@ -1,3 +1,5 @@
+import { UserData, TelegramApp } from './user.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     const roomWidthInput = document.getElementById('room-width');
     const roomHeightInput = document.getElementById('room-height');
@@ -6,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const calculateWallpaperButton = document.getElementById('calculate-wallpaper');
     const rollsNeededSpan = document.getElementById('rolls-needed');
 
-    calculateWallpaperButton.addEventListener('click', () => {
+    calculateWallpaperButton.addEventListener('click', async () => {
         const roomWidth = parseFloat(roomWidthInput.value);
         const roomHeight = parseFloat(roomHeightInput.value);
         const wallpaperWidth = parseFloat(wallpaperWidthInput.value);
@@ -23,5 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const rollsNeeded = Math.ceil(stripsNeeded / stripsPerRoll);
 
         rollsNeededSpan.textContent = rollsNeeded;
+
+        // Save the parameters
+        await UserData.saveToolSettings(TelegramApp.chatId, UserData.currentToolId, {
+            roomWidth: roomWidth,
+            roomHeight: roomHeight,
+            wallpaperWidth: wallpaperWidth,
+            wallpaperLength: wallpaperLength,
+            rollsNeeded: rollsNeeded
+        });
     });
 });

@@ -97,7 +97,7 @@ async fetchToolSettings(chatId, toolId) {
         });
 
         if (!response.ok) {
-            throw new Error(`Failed to fetch tax rate. Status Code: ${response.status}`);
+            throw new Error(`Failed to fetch user preferencies. Status Code: ${response.status}`);
         }
 
         const data = await response.json();
@@ -105,15 +105,14 @@ async fetchToolSettings(chatId, toolId) {
         // Find the favorite for the given tool_id
         const favorite = data.find(fav => fav.tool_id === toolId);
 
-        if (favorite && favorite.settings && favorite.settings.taxRate) {
-            console.log('Tax rate restored:', favorite.settings.taxRate);
+        if (favorite && favorite.settings) {
             return favorite.settings;
         } else {
             console.log('No tax rate found for the specified tool.');
             return null;
         }
     } catch (error) {
-        console.error('Error fetching tax rate:', error);
+        console.error('Error fetching user preferencies:', error);
         return null;
     }
 },
@@ -122,7 +121,7 @@ async saveToolSettings(chatId, toolId, settings) {
     const apiUrl = `${this.API_BASE_URL}/api/user/favorites/${toolId}?user_id=${chatId}`;
     const payload = {
         position: 1, // You can set it to any value
-        settings: settings // Store the tax rate in the settings object
+        settings: settings // Store settings
     };
 
     try {
@@ -136,13 +135,13 @@ async saveToolSettings(chatId, toolId, settings) {
         });
 
         if (!response.ok) {
-            throw new Error(`Failed to save tax rate. Status Code: ${response.status}`);
+            throw new Error(`Failed to save user preferencies for tool. Status Code: ${response.status}`);
         }
 
         const data = await response.json();
         console.log('Tax rate saved successfully:', data);
     } catch (error) {
-        console.error('Error saving tax rate:', error);
+        console.error('Error saving user preferencies:', error);
     }
 }
 
